@@ -20,9 +20,8 @@ using namespace std;
 
 int main() {
   pid_t pid; 
-  /*without const it does not let you run the program and throws 2 warnings
-  the warnings would indicate the messages for child and parent*/
-  const char *message; //has to be a constant
+
+  char *message; 
   int n; 
 
   cout << "fork program starting\n";
@@ -32,11 +31,11 @@ int main() {
       cout << "Fork failure!\n";
       return 1; 
     case 0: 
-      message = "This is the child\n";
+      message = (char *) "This is the child\n";
       n = 5; 
       break;
     default: 
-      message = "This is the parent\n";
+      message = (char *) "This is the parent\n";
       n = 3; 
       break;
   }

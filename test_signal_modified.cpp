@@ -7,14 +7,12 @@
 
 using namespace std;
 
-void func(int sig) 
-{
+void func(int sig) {
   if (sig == SIGINT) //if ^c is hit it will print
     cout << "Oops! -- I got a signal " << sig << endl;
 }
 
-int main()
-{
+int main(){
   struct sigaction s_a; //declaring sigaction;
 
   sigemptyset(&s_a.sa_mask); //calling the sigemptyset
@@ -26,7 +24,7 @@ int main()
     if (sigaction(SIGINT, &s_a, NULL) == -1){ //calls the func and prints out "Oops..."
       perror("SIGACTION");
     }
-    //can stop the while loop using ^\ 
+    /*can stop the while loop using ^\*/ 
   }
   return 0;
 }
