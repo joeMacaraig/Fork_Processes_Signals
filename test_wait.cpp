@@ -40,28 +40,34 @@ int main(){
   //waiting for child to finish
   if (pid != 0) {
     int stat_val; //parent
-    pid_t child_pid;
+    pid_t child_pid, gchild_pid;
+    pid_2 = fork();
     child_pid = wait (&stat_val); //wait for child
+    gchild_pid = wait (&stat_val); //wait for grandchild
     cout << "Child is finished: PID = " << child_pid << endl; 
     if (WIFEXITED (stat_val)){
       cout << "child exited with code " << WEXITSTATUS (stat_val) << endl; 
     } else {
       cout << "child is terminated abnormally!" << endl; 
     }
+    if (pid_2 == 0){
+      cout << "grandchild PID :" << getpid() << endl; //prints grandchild pid
+      cout << "parent PID :" << child_pid << endl; //prints parent pid
+      cout << "grandparent PID :" << getpgid(pid); //prints the pid of grandparents 
+    }    
     exit (exit_code); 
   }
+  return 0;
+}
 
-  if (pid == 0){//grandchild
+  /*if (pid == 0){//grandchild
     int val; //child
     pid_t gchild_pid;
-    gchild_pid = wait (&val);
+    gchild_pid = wait (&val);//wait for grandchild
     pid_2 = fork(); 
     if (pid_2 == 0){
       cout << "grandchild PID :" << getpid() << endl; //prints grandchild pid
       cout << "parent PID :" << getppid() << endl; //prints parent pid
       cout << "grandparent PID :" << getpgid(pid); //prints the pid of grandparents 
     }
-  }
-
-  return 0; 
-}
+  }*/
