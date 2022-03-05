@@ -4,7 +4,6 @@
 #include <sys/types.h> 
 #include <unistd.h>
 #include <iostream> 
-#include <vector>
 
 using namespace std; 
 
@@ -18,14 +17,12 @@ int main(){
   
   pid_t pid; 
   int n = 10; //number of processes
-  vector<int> ids; 
 
   pid = fork(); //first fork
 
   for(int i = 0; i < n; i++){
     if (pid == 0){
-      cout << "Processes " << i << " PPID: " << getppid() << " is the parent of processes " << i+1 << " PID: " << getpid() << endl;
-      ids.push_back(getpid());
+      cout << "Processes " << i << " PPID: " << getppid() << " is the parent of processes " << i+1 << " PID: " << getpid() << endl;//process i = parent, process i+2 = child
       pid = fork(); //without this it will print the same PID and PPID 10 times.
     }
   }
